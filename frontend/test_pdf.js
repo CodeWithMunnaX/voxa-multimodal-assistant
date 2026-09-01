@@ -1,0 +1,1 @@
+const fs = require('fs'); const pdf = require('pdf-parse'); const buffer = fs.readFileSync('D:\\VOXA AI 3\\frontend\\test\\data\\05-versions-space.pdf'); pdf(buffer).then(data => console.log('SUCCESS:', data.text)).catch(err => console.error('ERROR:', err.message));
