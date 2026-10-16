@@ -132,9 +132,10 @@ export default function ChatPage() {
     formData.append("file", file)
 
     try {
-      const token = localStorage.getItem("token")
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const response = await fetch(`${apiUrl}/api/media/upload`, {
+      const token = localStorage.getItem("access_token") || sessionStorage.getItem("access_token")
+      // NEXT_PUBLIC_API_URL already ends with /api (same convention as src/lib/api.ts)
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+      const response = await fetch(`${apiUrl}/media/upload`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`

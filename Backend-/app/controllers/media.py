@@ -22,6 +22,8 @@ class MediaResponse(BaseModel):
 
 @router.post("/upload", response_model=MediaResponse)
 async def upload_file(file: UploadFile = File(...), token: str = Depends(oauth2_scheme)):
+    if not (settings.CLOUDINARY_CLOUD_NAME and settings.CLOUDINARY_API_KEY and settings.CLOUDINARY_API_SECRET):
+        raise HTTPException(status_code=503, detail="Media uploads are not configured on this server.")
     try:
         # Upload to Cloudinary
         result = cloudinary.uploader.upload(

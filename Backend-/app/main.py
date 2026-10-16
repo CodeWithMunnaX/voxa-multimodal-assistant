@@ -101,8 +101,9 @@ app.add_middleware(
         "http://127.0.0.1:3001",
         "http://localhost:3002",
         "http://127.0.0.1:3002",
-        settings.FRONTEND_URL
-    ], 
+        # FRONTEND_URL may hold several comma-separated origins (e.g. vercel.app + custom domain)
+        *[origin.strip().rstrip("/") for origin in settings.FRONTEND_URL.split(",") if origin.strip()],
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

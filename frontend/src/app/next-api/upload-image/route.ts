@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 
-const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || "xtia9igo";
-const API_KEY = process.env.CLOUDINARY_API_KEY || "192388127484151";
-const API_SECRET = process.env.CLOUDINARY_API_SECRET || "8fpZeSWoD_7hc356lxDGiv_T0HM";
+const CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || "";
+const API_KEY = process.env.CLOUDINARY_API_KEY || "";
+const API_SECRET = process.env.CLOUDINARY_API_SECRET || "";
 
 export async function POST(req: NextRequest) {
   try {

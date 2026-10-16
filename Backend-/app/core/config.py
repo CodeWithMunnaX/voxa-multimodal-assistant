@@ -30,14 +30,12 @@ def get_config_error() -> Optional[str]:
     settings = get_settings()
     missing = []
     if not settings.DATABASE_URL: missing.append("DATABASE_URL")
-    if not settings.OPENAI_API_KEY: missing.append("OPENAI_API_KEY")
+    if not (settings.GEMINI_API_KEY or settings.OPENAI_API_KEY): missing.append("GEMINI_API_KEY (or OPENAI_API_KEY)")
     if not settings.SECRET_KEY: missing.append("SECRET_KEY")
-    # For now, Cloudinary might not be strictly required to boot, but we'll flag it if missing.
-    # The prompt says: "If any variable is missing: ... log which ... return 500"
-    if not settings.CLOUDINARY_CLOUD_NAME: missing.append("CLOUDINARY_CLOUD_NAME")
-    if not settings.CLOUDINARY_API_KEY: missing.append("CLOUDINARY_API_KEY")
-    if not settings.CLOUDINARY_API_SECRET: missing.append("CLOUDINARY_API_SECRET")
-    
+    # Cloudinary is only needed for media uploads, so it doesn't block the whole API
+    if not (settings.CLOUDINARY_CLOUD_NAME and settings.CLOUDINARY_API_KEY and settings.CLOUDINARY_API_SECRET):
+        logger.warning("Cloudinary is not configured; /api/media/upload will be unavailable.")
+
     if missing:
         error_msg = f"Missing {', '.join(missing)} in .env"
         logger.error(error_msg)
