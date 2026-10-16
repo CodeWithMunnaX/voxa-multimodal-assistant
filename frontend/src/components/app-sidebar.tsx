@@ -93,10 +93,10 @@ export function AppSidebar() {
   const pathname = usePathname()
   
   return (
-    <Sidebar className="border-r border-border/50 dark:bg-neutral-950 bg-white backdrop-blur-2xl">
-      <SidebarHeader className="p-4 border-b border-border/50">
-        <div className="flex items-center gap-2 font-bold text-xl">
-          <div className="h-8 w-8 rounded-none bg-indigo-600 flex items-center justify-center text-white">
+    <Sidebar className="border-r border-border dark:bg-neutral-950 bg-white backdrop-blur-2xl">
+      <SidebarHeader className="p-4 border-b border-border">
+        <div className="flex items-center gap-2 font-bold text-xl text-foreground">
+          <div className="h-8 w-8 rounded-none bg-gradient-to-br from-[#7C5CFF] to-[#4F8CFF] flex items-center justify-center text-white">
             <Mic className="h-4 w-4" />
           </div>
           <span>Voxa AI</span>
@@ -112,7 +112,7 @@ export function AppSidebar() {
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton 
                       isActive={isActive} 
-                      className={`py-6 rounded-none ${isActive ? 'bg-indigo-500/10 text-indigo-500 font-bold border-r-2 border-indigo-500' : 'text-muted-foreground'}`}
+                      className={`py-6 rounded-none ${isActive ? 'bg-secondary text-primary font-bold border-r-2 border-primary' : 'text-muted-foreground hover:text-foreground hover:bg-muted'}`}
                       render={
                         <a href={item.url} className="flex items-center gap-3">
                           <item.icon className="h-5 w-5" />
@@ -127,8 +127,8 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-4 border-t border-border/50">
-        <div className="flex items-center justify-between px-3.5 py-2.5 bg-indigo-950/40 border border-indigo-500/30 text-indigo-300 font-mono text-xs rounded-none">
+      <SidebarFooter className="p-4 border-t border-border">
+        <div className="flex items-center justify-between px-3.5 py-2.5 bg-secondary border border-primary/30 text-primary font-mono text-xs rounded-none">
           <span className="font-semibold tracking-wider uppercase text-[11px]">Pro Plan</span>
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
         </div>

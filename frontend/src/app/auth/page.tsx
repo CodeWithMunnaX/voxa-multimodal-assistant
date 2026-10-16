@@ -61,23 +61,42 @@ export default function AuthPage() {
     }
   }
 
+  // Public demo account with sample chats, notes and documents (created by Backend-/seed.py)
+  async function handleDemoLogin() {
+    setIsLoading(true)
+    setError("")
+    try {
+      const loginData = await api.post<{ access_token: string }>('/auth/login', {
+        email: "demo@codewithmunnax.com",
+        password: "Demo@1234",
+      })
+      await login(loginData.access_token)
+      toast.success("Logged in to the demo workspace")
+      router.push("/chat")
+    } catch (err: any) {
+      setError(err.message || "Demo login failed. The server may be waking up, try again in a minute.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-neutral-950 flex items-center justify-center font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground flex items-center justify-center font-sans relative overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-neutral-950/40 mix-blend-multiply z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/50 to-transparent z-10" />
+        <div className="absolute inset-0 bg-background/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 to-transparent z-10" />
         <motion.img 
           initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 0.15, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
           src="/auth-hero.png" 
           alt="Voxa AI Background" 
-          className="w-full h-full object-cover mix-blend-screen opacity-50" 
+          className="w-full h-full object-cover" 
           style={!isLogin ? { transform: 'scaleX(-1)' } : undefined}
         />
-        <div className={`absolute w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none z-10 transition-all duration-700 ${isLogin ? 'top-1/4 left-1/4 bg-indigo-600/20' : 'top-0 right-0 bg-purple-600/30'}`} />
-        <div className={`absolute w-[600px] h-[600px] rounded-full blur-[150px] pointer-events-none z-10 transition-all duration-700 ${isLogin ? 'bottom-1/4 right-1/4 bg-purple-600/20' : 'bottom-0 left-0 bg-indigo-600/20'}`} />
+        <div className={`absolute w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none z-10 transition-all duration-700 ${isLogin ? 'top-1/4 left-1/4 bg-[#7C5CFF]/15' : 'top-0 right-0 bg-purple-400/20'}`} />
+        <div className={`absolute w-[600px] h-[600px] rounded-full blur-[150px] pointer-events-none z-10 transition-all duration-700 ${isLogin ? 'bottom-1/4 right-1/4 bg-[#4F8CFF]/15' : 'bottom-0 left-0 bg-[#7C5CFF]/15'}`} />
       </div>
 
       <div className="w-full max-w-md p-6 z-20 relative">
@@ -85,13 +104,13 @@ export default function AuthPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-neutral-900/60 backdrop-blur-2xl border border-neutral-800/50 p-8 rounded-3xl shadow-2xl"
+          className="bg-card/90 backdrop-blur-2xl border border-border p-8 rounded-3xl shadow-[0_8px_40px_-12px_rgba(124,92,255,0.25)]"
         >
           <Link href="/" className="flex items-center justify-center gap-3 font-bold text-3xl tracking-tight mb-8 transition-transform hover:opacity-80">
-            <div className={`h-10 w-10 rounded-xl bg-gradient-to-tr flex items-center justify-center text-white transition-colors duration-500 ${isLogin ? 'from-indigo-600 to-purple-500 shadow-[0_0_20px_rgba(79,70,229,0.3)]' : 'from-purple-600 to-indigo-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]'}`}>
+            <div className={`h-10 w-10 rounded-xl bg-gradient-to-tr flex items-center justify-center text-white transition-colors duration-500 ${isLogin ? 'from-[#7C5CFF] to-[#4F8CFF] shadow-[0_4px_16px_-4px_rgba(124,92,255,0.5)]' : 'from-[#4F8CFF] to-[#7C5CFF] shadow-[0_4px_16px_-4px_rgba(124,92,255,0.5)]'}`}>
               <Mic className="h-5 w-5" />
             </div>
-            <span className="text-white">Voxa <span className={`font-medium transition-colors duration-500 ${isLogin ? 'text-indigo-400' : 'text-purple-400'}`}>AI</span></span>
+            <span className="text-foreground">Voxa <span className={`font-medium transition-colors duration-500 ${isLogin ? 'text-primary' : 'text-purple-600'}`}>AI</span></span>
           </Link>
           
           <div className="mb-8 text-center overflow-hidden">
@@ -103,10 +122,10 @@ export default function AuthPage() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                <h1 className="text-2xl font-bold tracking-tight text-white mb-2">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground mb-2">
                   {isLogin ? "Welcome back" : "Create an account"}
                 </h1>
-                <p className="text-neutral-400 text-sm">
+                <p className="text-muted-foreground text-sm">
                   {isLogin ? "Enter your credentials to access your workspace." : "Join us to start building the future."}
                 </p>
               </motion.div>
@@ -120,7 +139,7 @@ export default function AuthPage() {
                   initial={{ opacity: 0, height: 0, marginBottom: 0 }}
                   animate={{ opacity: 1, height: 'auto', marginBottom: 16 }}
                   exit={{ opacity: 0, height: 0, marginBottom: 0 }}
-                  className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium flex items-center gap-2 overflow-hidden"
+                  className="p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm font-medium flex items-center gap-2 overflow-hidden"
                 >
                   <div className="h-1.5 w-1.5 rounded-full bg-red-500 flex-shrink-0" />
                   {error}
@@ -137,14 +156,14 @@ export default function AuthPage() {
                   className="space-y-2 overflow-hidden"
                 >
                   <div className="pb-4">
-                    <Label htmlFor="name" className="text-neutral-300">Name</Label>
+                    <Label htmlFor="name" className="text-foreground">Name</Label>
                     <Input 
                       id="name" 
                       name="name"
                       type="text" 
                       placeholder="John Doe" 
                       required={!isLogin} 
-                      className={`bg-neutral-950/50 border-neutral-800 h-12 rounded-xl focus-visible:ring-1 text-white placeholder:text-neutral-600 transition-all mt-2 ${!isLogin ? 'focus-visible:ring-purple-500' : 'focus-visible:ring-indigo-500'}`}
+                      className={`bg-white border-input h-12 rounded-xl focus-visible:ring-1 text-foreground placeholder:text-muted-foreground/70 transition-all mt-2 ${!isLogin ? 'focus-visible:ring-purple-500' : 'focus-visible:ring-indigo-500'}`}
                     />
                   </div>
                 </motion.div>
@@ -152,22 +171,22 @@ export default function AuthPage() {
             </AnimatePresence>
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-neutral-300">Email address</Label>
+              <Label htmlFor="email" className="text-foreground">Email address</Label>
               <Input 
                 id="email" 
                 name="email"
                 type="email" 
                 placeholder="name@example.com" 
                 required 
-                className={`bg-neutral-950/50 border-neutral-800 h-12 rounded-xl focus-visible:ring-1 text-white placeholder:text-neutral-600 transition-all ${isLogin ? 'focus-visible:ring-indigo-500' : 'focus-visible:ring-purple-500'}`}
+                className={`bg-white border-input h-12 rounded-xl focus-visible:ring-1 text-foreground placeholder:text-muted-foreground/70 transition-all ${isLogin ? 'focus-visible:ring-indigo-500' : 'focus-visible:ring-purple-500'}`}
               />
             </div>
             
             {isLogin ? (
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="text-neutral-300">Password</Label>
-                  <Link href="#" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+                  <Label htmlFor="password" className="text-foreground">Password</Label>
+                  <Link href="#" className="text-xs text-primary hover:text-primary/80 transition-colors">
                     Forgot password?
                   </Link>
                 </div>
@@ -177,31 +196,31 @@ export default function AuthPage() {
                   type="password" 
                   placeholder="••••••••••••"
                   required
-                  className="bg-neutral-950/50 border-neutral-800 h-12 rounded-xl focus-visible:ring-1 focus-visible:ring-indigo-500 text-white placeholder:text-neutral-600 transition-all"
+                  className="bg-white border-input h-12 rounded-xl focus-visible:ring-1 text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-indigo-500 transition-all"
                 />
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-neutral-300">Password</Label>
+                  <Label htmlFor="password" className="text-foreground">Password</Label>
                   <Input 
                     id="password" 
                     name="password"
                     type="password" 
                     placeholder="••••••••"
                     required
-                    className="bg-neutral-950/50 border-neutral-800 h-12 rounded-xl focus-visible:ring-1 focus-visible:ring-purple-500 text-white placeholder:text-neutral-600 transition-all"
+                    className="bg-white border-input h-12 rounded-xl focus-visible:ring-1 text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-purple-500 transition-all"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword" className="text-neutral-300">Confirm</Label>
+                  <Label htmlFor="confirmPassword" className="text-foreground">Confirm</Label>
                   <Input 
                     id="confirmPassword" 
                     name="confirmPassword"
                     type="password" 
                     placeholder="••••••••"
                     required
-                    className="bg-neutral-950/50 border-neutral-800 h-12 rounded-xl focus-visible:ring-1 focus-visible:ring-purple-500 text-white placeholder:text-neutral-600 transition-all"
+                    className="bg-white border-input h-12 rounded-xl focus-visible:ring-1 text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-purple-500 transition-all"
                   />
                 </div>
               </div>
@@ -219,17 +238,17 @@ export default function AuthPage() {
                     id="remember" 
                     checked={rememberMe}
                     onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-                    className="border-neutral-700 data-[state=checked]:bg-indigo-600 data-[state=checked]:border-indigo-600 rounded" 
+                    className="border-input data-[state=checked]:bg-primary data-[state=checked]:border-primary rounded" 
                   />
-                  <label htmlFor="remember" className="text-sm font-medium leading-none text-neutral-400 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
+                  <label htmlFor="remember" className="text-sm font-medium leading-none text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
                     Remember me for 30 days
                   </label>
                 </motion.div>
               )}
             </AnimatePresence>
             
-            <Button type="submit" className="w-full bg-white hover:bg-neutral-200 text-neutral-950 h-12 rounded-xl font-bold text-base shadow-lg transition-all group relative overflow-hidden mt-2" disabled={isLoading}>
-              <div className={`absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-100%] group-hover:translate-x-[100%] duration-1000 ${isLogin ? 'from-indigo-500/0 via-indigo-500/10 to-indigo-500/0' : 'from-purple-500/0 via-purple-500/10 to-purple-500/0'}`} />
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 rounded-xl font-bold text-base shadow-[0_4px_24px_-8px_rgba(124,92,255,0.5)] transition-all group relative overflow-hidden mt-2" disabled={isLoading}>
+              <div className={`absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-100%] group-hover:translate-x-[100%] duration-1000 ${isLogin ? 'from-white/0 via-white/20 to-white/0' : 'from-white/0 via-white/20 to-white/0'}`} />
               {isLoading ? (
                 <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
@@ -239,9 +258,21 @@ export default function AuthPage() {
                 </span>
               )}
             </Button>
+
+            {isLogin && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleDemoLogin}
+                disabled={isLoading}
+                className="w-full h-12 rounded-xl font-semibold bg-secondary border-border text-secondary-foreground hover:bg-accent"
+              >
+                Try demo account
+              </Button>
+            )}
           </form>
 
-          <div className="mt-6 text-center text-sm text-neutral-400 pt-6 border-t border-neutral-800/50">
+          <div className="mt-6 text-center text-sm text-muted-foreground pt-6 border-t border-border">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button 
               type="button" 
@@ -249,7 +280,7 @@ export default function AuthPage() {
                 setIsLogin(!isLogin)
                 setError("")
               }} 
-              className={`font-semibold transition-colors ${isLogin ? 'text-white hover:text-indigo-400' : 'text-white hover:text-purple-400'}`}
+              className={`font-semibold transition-colors ${isLogin ? 'text-primary hover:text-primary/80' : 'text-primary hover:text-purple-600'}`}
             >
               {isLogin ? "Create one now" : "Sign in here"}
             </button>

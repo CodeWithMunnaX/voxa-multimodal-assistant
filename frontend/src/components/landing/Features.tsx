@@ -16,14 +16,14 @@ export function Features() {
       icon: <FileText className="h-8 w-8" />,
       title: "Document Analyzer",
       description: "Drag and drop PDFs. Extract insights, generate mind maps, and create flashcards instantly.",
-      color: "from-electric-blue-500 to-cyan-500",
+      color: "from-electric-blue to-cyan-500",
       delay: 0.2,
     },
     {
       icon: <BookOpen className="h-8 w-8" />,
       title: "Intelligent Tutor",
       description: "Personalized learning roadmaps, mock tests, and topic explanations adapted to your pace.",
-      color: "from-magenta-500 to-pink-500",
+      color: "from-magenta to-pink-500",
       delay: 0.3,
     },
     {
@@ -57,17 +57,17 @@ export function Features() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-foreground"
           >
             Everything you need. <br />
-            <span className="text-secondary-text">In one intelligent ecosystem.</span>
+            <span className="text-muted-foreground">In one intelligent ecosystem.</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-neutral-400 max-w-2xl mx-auto"
+            className="text-xl text-muted-foreground max-w-2xl mx-auto"
           >
             Voxa AI replaces fragmented tools with a unified, context-aware intelligence layer for all your workflows.
           </motion.p>
@@ -84,15 +84,15 @@ export function Features() {
               whileHover={{ y: -5 }}
               className="glass-card p-8 rounded-[28px] group cursor-pointer relative overflow-hidden"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-[0.06] transition-opacity duration-500`} />
               
               <div className={`h-16 w-16 rounded-2xl bg-gradient-to-br ${feature.color} bg-opacity-10 flex items-center justify-center text-white mb-6 shadow-lg relative z-10 group-hover:scale-110 transition-transform duration-500`}>
                 <div className="absolute inset-0 bg-white/20 rounded-2xl" />
                 <div className="relative z-10">{feature.icon}</div>
               </div>
               
-              <h3 className="text-2xl font-bold mb-3 text-white relative z-10">{feature.title}</h3>
-              <p className="text-secondary-text leading-relaxed relative z-10">{feature.description}</p>
+              <h3 className="text-2xl font-bold mb-3 text-foreground relative z-10">{feature.title}</h3>
+              <p className="text-muted-foreground leading-relaxed relative z-10">{feature.description}</p>
             </motion.div>
           ))}
         </div>

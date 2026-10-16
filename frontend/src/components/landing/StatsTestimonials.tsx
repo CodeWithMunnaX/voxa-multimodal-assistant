@@ -29,12 +29,12 @@ export function StatsTestimonials() {
   ];
 
   return (
-    <section className="py-24 relative z-10 px-6 border-t border-white/5 bg-background/50">
+    <section className="py-24 relative z-10 px-6 border-t border-border bg-background/50">
       <div className="max-w-7xl mx-auto">
         {/* Trusted By (Mock) */}
         <div className="text-center mb-24">
-          <p className="text-sm font-medium text-secondary-text mb-8 tracking-widest uppercase">Trusted by forward-thinking teams</p>
-          <div className="flex flex-wrap justify-center gap-12 opacity-50 grayscale">
+          <p className="text-sm font-medium text-muted-foreground mb-8 tracking-widest uppercase">Trusted by forward-thinking teams</p>
+          <div className="flex flex-wrap justify-center gap-12 opacity-60 grayscale text-muted-foreground">
              {/* Text fallbacks for logos to avoid missing images */}
              <span className="text-xl font-bold font-mono">ACME Corp</span>
              <span className="text-xl font-bold font-serif">Globex</span>
@@ -55,16 +55,16 @@ export function StatsTestimonials() {
               transition={{ delay: idx * 0.1 }}
               className="text-center"
             >
-              <div className="text-4xl md:text-5xl font-extrabold text-white mb-2">{stat.value}</div>
-              <div className="text-secondary-text font-medium">{stat.label}</div>
+              <div className="text-4xl md:text-5xl font-extrabold text-foreground mb-2">{stat.value}</div>
+              <div className="text-muted-foreground font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </div>
 
         {/* Testimonials */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Loved by thousands</h2>
-          <p className="text-secondary-text text-lg max-w-2xl mx-auto">Don't just take our word for it. See what our community has to say.</p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4 text-foreground">Loved by thousands</h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">Don't just take our word for it. See what our community has to say.</p>
         </div>
         
         <div className="grid md:grid-cols-3 gap-6">
@@ -77,14 +77,14 @@ export function StatsTestimonials() {
               transition={{ delay: idx * 0.1 }}
               className="glass p-8 rounded-3xl flex flex-col justify-between"
             >
-              <p className="text-neutral-300 leading-relaxed mb-8">"{testimonial.quote}"</p>
+              <p className="text-foreground/80 leading-relaxed mb-8">"{testimonial.quote}"</p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-electric-blue-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#7C5CFF] to-[#4F8CFF] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                   {testimonial.author.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-bold text-white">{testimonial.author}</div>
-                  <div className="text-sm text-secondary-text">{testimonial.role}</div>
+                  <div className="font-bold text-foreground">{testimonial.author}</div>
+                  <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                 </div>
               </div>
             </motion.div>

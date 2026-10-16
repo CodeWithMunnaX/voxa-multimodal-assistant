@@ -25,7 +25,7 @@ export function ChatMessage({ role, content, mediaUrl, onRegenerate, onEdit }: C
     <div className={`flex flex-col gap-2 ${isUser ? 'items-end' : 'items-start'} group w-full`}>
       {!isUser && (
         <div className="flex items-center gap-2 mb-1">
-          <div className="h-7 w-7 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/20">
+          <div className="h-7 w-7 rounded-xl bg-gradient-to-br from-[#7C5CFF] to-[#4F8CFF] flex items-center justify-center shadow-md shadow-primary/20">
             <Mic className="h-3.5 w-3.5 text-white" />
           </div>
         </div>
@@ -33,11 +33,11 @@ export function ChatMessage({ role, content, mediaUrl, onRegenerate, onEdit }: C
       
       <div className={`
         ${isUser 
-          ? 'bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-5 py-3' 
-          : 'bg-card text-card-foreground rounded-2xl rounded-tl-sm px-6 py-5 border border-border/50 glass-card w-full max-w-full overflow-hidden'
+          ? 'bg-primary text-primary-foreground rounded-2xl rounded-tr-sm px-5 py-3'
+          : 'bg-card text-card-foreground rounded-2xl rounded-tl-sm px-6 py-5 border border-border glass-card w-full max-w-full overflow-hidden'
         } max-w-[85%] text-[15px] leading-relaxed shadow-sm relative
       `}>
-        <div className={`whitespace-pre-wrap markdown-content prose dark:prose-invert ${isUser ? 'prose-p:text-white prose-headings:text-white' : ''} max-w-full`}>
+        <div className={`whitespace-pre-wrap markdown-content prose dark:prose-invert ${isUser ? 'prose-p:text-primary-foreground prose-headings:text-primary-foreground' : 'prose-p:text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-a:text-primary'} max-w-full`}>
           {isUser ? (
             <p>{content}</p>
           ) : (
@@ -68,7 +68,7 @@ export function ChatMessage({ role, content, mediaUrl, onRegenerate, onEdit }: C
                       </SyntaxHighlighter>
                     </div>
                   ) : (
-                    <code {...props} className="bg-muted px-1.5 py-0.5 rounded-sm font-mono text-sm">
+                    <code {...props} className="bg-muted text-foreground px-1.5 py-0.5 rounded-sm font-mono text-sm">
                       {children}
                     </code>
                   )
@@ -81,7 +81,7 @@ export function ChatMessage({ role, content, mediaUrl, onRegenerate, onEdit }: C
         </div>
         
         {mediaUrl && (
-          <div className="mt-3 rounded-xl overflow-hidden border border-white/10">
+          <div className="mt-3 rounded-xl overflow-hidden border border-border">
             <img src={mediaUrl} alt="Uploaded media" className="max-w-full h-auto max-h-64 object-cover" />
           </div>
         )}
@@ -105,7 +105,7 @@ export function ChatMessage({ role, content, mediaUrl, onRegenerate, onEdit }: C
       </div>
       
       {isUser && (
-        <div className="h-6 w-6 rounded-full bg-fuchsia-600 flex items-center justify-center text-xs font-medium self-end mt-1">
+        <div className="h-6 w-6 rounded-full bg-fuchsia-600 text-white flex items-center justify-center text-xs font-medium self-end mt-1">
           U
         </div>
       )}

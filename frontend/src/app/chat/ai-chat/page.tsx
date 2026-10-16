@@ -194,7 +194,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex flex-col h-full bg-transparent text-white relative font-sans">
+    <div className="flex flex-col h-full bg-transparent text-foreground relative font-sans">
       {/* Chat Area */}
       <div 
         className="flex-1 p-4 md:p-8 overflow-y-auto"
@@ -216,14 +216,14 @@ export default function ChatPage() {
           {isLoading && (
             <div className="flex flex-col gap-2 items-start">
               <div className="flex items-center gap-2 mb-1">
-                <div className="h-7 w-7 rounded-xl bg-indigo-600/50 flex items-center justify-center animate-pulse">
+                <div className="h-7 w-7 rounded-xl bg-gradient-to-br from-[#7C5CFF] to-[#4F8CFF] flex items-center justify-center animate-pulse">
                   <Mic className="h-3.5 w-3.5 text-white" />
                 </div>
               </div>
-              <div className="bg-neutral-800 rounded-2xl rounded-tl-sm px-6 py-5 border border-neutral-700/50 flex gap-2">
-                <div className="h-2 w-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <div className="h-2 w-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <div className="h-2 w-2 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              <div className="bg-card rounded-2xl rounded-tl-sm px-6 py-5 border border-border shadow-sm flex gap-2">
+                <div className="h-2 w-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <div className="h-2 w-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <div className="h-2 w-2 bg-primary/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
             </div>
           )}
@@ -232,7 +232,7 @@ export default function ChatPage() {
       </div>
 
       {/* Input Area */}
-      <div className="p-4 bg-black/20 backdrop-blur-xl border-t border-white/10">
+      <div className="p-4 bg-white/70 backdrop-blur-xl border-t border-border">
         <div className="max-w-4xl mx-auto relative flex items-center">
           <input 
             type="file" 
@@ -244,7 +244,7 @@ export default function ChatPage() {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="absolute left-2 text-neutral-400 hover:text-white rounded-full transition-colors z-10"
+            className="absolute left-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-full transition-colors z-10"
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
           >
@@ -257,7 +257,7 @@ export default function ChatPage() {
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             disabled={isLoading}
-            className={`w-full bg-neutral-800/80 border-neutral-700 h-14 pl-12 pr-24 rounded-2xl text-white placeholder:text-neutral-500 focus-visible:ring-1 focus-visible:ring-indigo-500 shadow-sm transition-all ${isListening ? 'ring-1 ring-red-500 bg-red-500/5' : ''}`}
+            className={`w-full bg-white border-input h-14 pl-12 pr-24 rounded-2xl text-foreground placeholder:text-muted-foreground focus-visible:ring-1 focus-visible:ring-primary shadow-sm transition-all ${isListening ? 'ring-1 ring-red-500 bg-red-500/5' : ''}`}
           />
           
           <div className="absolute right-2 flex items-center gap-1 z-10">
@@ -265,7 +265,7 @@ export default function ChatPage() {
               variant="ghost" 
               size="icon" 
               onClick={toggleListening}
-              className={`rounded-full transition-colors ${isListening ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20 hover:text-red-400 animate-pulse' : 'text-neutral-400 hover:text-white'}`}
+              className={`rounded-full transition-colors ${isListening ? 'text-red-500 bg-red-500/10 hover:bg-red-500/20 hover:text-red-600 animate-pulse' : 'text-muted-foreground hover:text-foreground hover:bg-muted'}`}
             >
               {isListening ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
             </Button>
@@ -273,7 +273,7 @@ export default function ChatPage() {
               size="icon" 
               onClick={handleSend} 
               disabled={isLoading || !inputValue.trim()}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl h-10 w-10 shadow-md shadow-indigo-600/20 transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-10 w-10 shadow-md shadow-primary/20 transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
             >
               <Send className="h-4 w-4" />
             </Button>

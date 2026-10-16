@@ -33,7 +33,7 @@ export function Navbar() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         scrolled 
-          ? "bg-background/80 backdrop-blur-2xl border-white/10 shadow-lg shadow-black/20 py-4" 
+          ? "bg-white/80 backdrop-blur-2xl border-border shadow-[0_4px_24px_-8px_rgba(124,92,255,0.15)] py-4"
           : "bg-transparent border-transparent py-6"
       }`}
     >
@@ -42,13 +42,13 @@ export function Navbar() {
           <motion.div 
             whileHover={{ scale: 1.05, rotate: 5 }}
             whileTap={{ scale: 0.95 }}
-            className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-violet-500/25 relative overflow-hidden"
+            className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#7C5CFF] to-[#4F8CFF] flex items-center justify-center text-white shadow-lg shadow-violet-500/25 relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
             <Mic className="h-5 w-5 relative z-10" />
           </motion.div>
-          <span className="font-bold text-xl tracking-tight text-white">
-            Voxa <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-blue-400">AI</span>
+          <span className="font-bold text-xl tracking-tight text-foreground">
+            Voxa <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C5CFF] to-[#4F8CFF]">AI</span>
           </span>
         </Link>
 
@@ -59,7 +59,7 @@ export function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href}
-                className="text-sm font-medium text-neutral-400 hover:text-white transition-colors relative group"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
               >
                 {link.name}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-violet-500 transition-all group-hover:w-full" />
@@ -67,14 +67,14 @@ export function Navbar() {
             ))}
           </div>
           
-          <div className="flex items-center gap-4 border-l border-white/10 pl-8">
+          <div className="flex items-center gap-4 border-l border-border pl-8">
             <Link href="/auth">
-              <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white rounded-full px-6 transition-all hover-lift">
+              <Button variant="ghost" className="text-foreground hover:bg-muted hover:text-foreground rounded-full px-6 transition-all hover-lift">
                 Login
               </Button>
             </Link>
             <Link href="/auth">
-              <Button className="bg-white text-black hover:bg-neutral-200 rounded-full px-6 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)] transition-all hover-lift">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_4px_16px_-4px_rgba(124,92,255,0.4)] hover:shadow-[0_6px_24px_-4px_rgba(124,92,255,0.5)] transition-all hover-lift">
                 Get Started
               </Button>
             </Link>
@@ -83,7 +83,7 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-white p-2"
+          className="md:hidden text-foreground p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X /> : <Menu />}
@@ -97,14 +97,14 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-white/95 backdrop-blur-xl border-b border-border overflow-hidden"
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
+                <Link
+                  key={link.name}
                   href={link.href}
-                  className="text-lg font-medium text-neutral-300 hover:text-white py-2 border-b border-white/5"
+                  className="text-lg font-medium text-muted-foreground hover:text-foreground py-2 border-b border-border"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -112,12 +112,12 @@ export function Navbar() {
               ))}
               <div className="flex flex-col gap-3 mt-4">
                 <Link href="/auth">
-                  <Button variant="outline" className="w-full border-white/20 text-white rounded-xl bg-transparent">
+                  <Button variant="outline" className="w-full border-border text-foreground hover:bg-muted rounded-xl bg-white">
                     Login
                   </Button>
                 </Link>
                 <Link href="/auth">
-                  <Button className="w-full bg-white text-black hover:bg-neutral-200 rounded-xl">
+                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl">
                     Get Started
                   </Button>
                 </Link>

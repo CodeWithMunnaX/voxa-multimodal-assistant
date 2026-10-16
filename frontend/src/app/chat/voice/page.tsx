@@ -177,7 +177,7 @@ export default function VoiceAssistantPage() {
   const hasRecognitionSupport = isMounted ? !!SpeechRecognition : false
 
   return (
-    <div className="relative w-full min-h-[calc(100vh-64px)] overflow-x-hidden bg-transparent dark:text-white text-neutral-900 flex items-start justify-center pt-12 font-sans transition-colors duration-300">
+    <div className="relative w-full min-h-[calc(100vh-64px)] overflow-x-hidden bg-transparent dark:text-white text-foreground flex items-start justify-center pt-12 font-sans transition-colors duration-300">
       
       {/* Animated Glow Overlays for Voice Activation */}
       <div className="absolute inset-0 z-0 dark:bg-gradient-to-t dark:from-neutral-950 dark:via-neutral-950/60 bg-transparent pointer-events-none" />
@@ -210,7 +210,7 @@ export default function VoiceAssistantPage() {
         </div>
 
         {/* Dynamic Status / Response Area */}
-        <div className="w-full max-w-2xl min-h-[120px] p-8 mb-8 rounded-3xl dark:bg-neutral-900/40 bg-white/80 backdrop-blur-md dark:border-neutral-800 border-neutral-200/80 shadow-xl flex flex-col items-center justify-center text-center transition-all duration-500">
+        <div className="w-full max-w-2xl min-h-[120px] p-8 mb-8 rounded-3xl dark:bg-neutral-900/40 bg-card/90 backdrop-blur-md border dark:border-neutral-800 border-border shadow-[0_4px_24px_-8px_rgba(124,92,255,0.15)] flex flex-col items-center justify-center text-center transition-all duration-500">
           {!hasRecognitionSupport ? (
             <p className="text-red-500 font-medium">Voice recognition is not supported in this browser.</p>
           ) : isListening ? (
@@ -222,17 +222,17 @@ export default function VoiceAssistantPage() {
               <p className="text-lg font-light leading-relaxed dark:text-neutral-200 text-neutral-800 whitespace-pre-wrap">{response}</p>
             </div>
           ) : (
-            <p className="text-xl font-light dark:text-neutral-500 text-neutral-600">Tap the robot and start speaking</p>
+            <p className="text-xl font-light dark:text-neutral-500 text-muted-foreground">Tap the robot and start speaking</p>
           )}
         </div>
 
         {/* Controls Panel */}
-        <div className="flex flex-col items-center w-full max-w-2xl gap-4 p-5 rounded-3xl dark:bg-neutral-900/30 bg-white/70 dark:border-neutral-800/60 border-neutral-200/80 backdrop-blur-md shadow-lg">
+        <div className="flex flex-col items-center w-full max-w-2xl gap-4 p-5 rounded-3xl dark:bg-neutral-900/30 bg-card/90 border dark:border-neutral-800/60 border-border backdrop-blur-md shadow-sm">
           <div className="flex items-center justify-between w-full">
-            <div className="flex gap-2 p-1.5 rounded-xl dark:bg-neutral-950/60 bg-neutral-100/80">
+            <div className="flex gap-2 p-1.5 rounded-xl dark:bg-neutral-950/60 bg-secondary">
               <button 
                 onClick={() => setMode("voice")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${mode === "voice" ? 'dark:bg-neutral-800 bg-white text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300'}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${mode === "voice" ? 'dark:bg-neutral-800 bg-white text-primary dark:text-indigo-300 shadow-sm' : 'text-muted-foreground hover:text-foreground dark:hover:text-neutral-300'}`}
               >
                 <div className="flex items-center gap-2">
                   <Mic className="w-4 h-4" /> Voice
@@ -240,7 +240,7 @@ export default function VoiceAssistantPage() {
               </button>
               <button 
                 onClick={() => setMode("text")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${mode === "text" ? 'dark:bg-neutral-800 bg-white text-indigo-600 dark:text-indigo-300 shadow-sm' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300'}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${mode === "text" ? 'dark:bg-neutral-800 bg-white text-primary dark:text-indigo-300 shadow-sm' : 'text-muted-foreground hover:text-foreground dark:hover:text-neutral-300'}`}
               >
                 <div className="flex items-center gap-2">
                   <Keyboard className="w-4 h-4" /> Text
@@ -252,7 +252,7 @@ export default function VoiceAssistantPage() {
               variant="ghost" 
               size="sm" 
               onClick={() => setUseVoiceOutput(!useVoiceOutput)}
-              className={`dark:text-neutral-400 text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-200/50 rounded-xl ${useVoiceOutput ? 'text-indigo-600 dark:text-indigo-400' : ''}`}
+              className={`dark:text-neutral-400 dark:hover:text-neutral-200 hover:bg-muted rounded-xl ${useVoiceOutput ? 'text-primary dark:text-indigo-400' : 'text-muted-foreground'}`}
             >
               {useVoiceOutput ? <Volume2 className="w-4 h-4 mr-2" /> : <VolumeX className="w-4 h-4 mr-2" />}
               {useVoiceOutput ? "Voice Enabled" : "Voice Muted"}
@@ -265,13 +265,13 @@ export default function VoiceAssistantPage() {
                 value={textInput}
                 onChange={(e) => setTextInput(e.target.value)}
                 placeholder="Ask your assistant anything..."
-                className="dark:bg-neutral-950/50 bg-white dark:border-neutral-800 border-neutral-200 dark:text-white text-neutral-900 placeholder:text-neutral-500 h-12 rounded-xl focus-visible:ring-indigo-500/50"
+                className="dark:bg-neutral-950/50 bg-white dark:border-neutral-800 border-input dark:text-white text-foreground placeholder:text-muted-foreground h-12 rounded-xl focus-visible:ring-primary/50"
                 disabled={isProcessing}
               />
               <Button 
                 type="submit" 
                 disabled={isProcessing || !textInput.trim()}
-                className="h-12 px-6 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl shadow-lg"
+                className="h-12 px-6 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl shadow-sm"
               >
                 {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
               </Button>

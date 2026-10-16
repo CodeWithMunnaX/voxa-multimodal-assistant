@@ -242,20 +242,20 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
   }
   
   return (
-    <div className="relative w-full min-h-[calc(100vh-64px)] overflow-x-hidden bg-transparent text-white flex items-center justify-center font-sans">
+    <div className="relative w-full min-h-[calc(100vh-64px)] overflow-x-hidden bg-transparent text-foreground flex items-center justify-center font-sans">
       <main className="flex-1 p-8 pb-20 relative z-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-none bg-blue-500/20 border border-blue-500/30 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-                <FileText className="h-6 w-6 text-blue-400" />
+              <div className="h-12 w-12 rounded-none bg-blue-50 border border-blue-100 flex items-center justify-center shadow-sm">
+                <FileText className="h-6 w-6 text-blue-600" />
               </div>
               <div>
-                <h1 className="text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                <h1 className="text-3xl font-extrabold tracking-tight text-foreground flex items-center gap-2">
                   Doc Analyzer
                 </h1>
-                <p className="text-neutral-400 text-sm mt-1">Upload PDFs, Word docs, or Text files and extract insights instantly.</p>
+                <p className="text-muted-foreground text-sm mt-1">Upload PDFs, Word docs, or Text files and extract insights instantly.</p>
               </div>
             </div>
             
@@ -263,7 +263,7 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
               <Button 
                 onClick={generateQuiz} 
                 disabled={isGeneratingQuiz || isUploading || isTyping}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-none shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all flex items-center gap-2"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-none shadow-[0_4px_24px_-8px_rgba(124,92,255,0.45)] transition-all flex items-center gap-2"
               >
                 {isGeneratingQuiz ? <Loader2 className="h-4 w-4 animate-spin" /> : <BrainCircuit className="h-4 w-4" />}
                 Generate Quiz
@@ -276,7 +276,7 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
             <div className="lg:col-span-1 space-y-6">
               {/* Upload Zone */}
               <label 
-                className={`bg-neutral-900/50 border-2 border-dashed ${isUploading ? 'border-blue-500/50' : 'border-neutral-700 hover:border-blue-500/50'} rounded-none p-10 flex flex-col items-center justify-center text-center transition-all cursor-pointer group relative overflow-hidden backdrop-blur-sm`}
+                className={`bg-card border-2 border-dashed ${isUploading ? 'border-blue-400' : 'border-input hover:border-blue-400'} rounded-none p-10 flex flex-col items-center justify-center text-center transition-all cursor-pointer group relative overflow-hidden shadow-sm`}
               >
                 <input 
                   type="file" 
@@ -285,43 +285,43 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                   onChange={handleFileUpload}
                   disabled={isUploading}
                 />
-                <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-blue-50/60 opacity-0 group-hover:opacity-100 transition-opacity" />
                 
                 {isUploading ? (
-                  <div className="h-16 w-16 rounded-none bg-blue-500/20 flex items-center justify-center mb-4 shadow-lg">
-                    <Loader2 className="h-8 w-8 text-blue-400 animate-spin" />
+                  <div className="h-16 w-16 rounded-none bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 shadow-sm">
+                    <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
                   </div>
                 ) : (
-                  <div className="h-16 w-16 rounded-none bg-neutral-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                    <UploadCloud className="h-8 w-8 text-blue-400" />
+                  <div className="h-16 w-16 rounded-none bg-blue-50 border border-blue-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                    <UploadCloud className="h-8 w-8 text-blue-600" />
                   </div>
                 )}
                 
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
                   {isUploading ? "Analyzing..." : "Upload a Document"}
                 </h3>
-                <p className="text-sm text-neutral-400 mb-6">Drag and drop or click to browse. Supports PDF, DOCX, TXT.</p>
+                <p className="text-sm text-muted-foreground mb-6">Drag and drop or click to browse. Supports PDF, DOCX, TXT.</p>
                 <Button variant="secondary" disabled={isUploading} className="bg-blue-600 hover:bg-blue-500 text-white rounded-none px-8 pointer-events-none">
                   {isUploading ? "Processing" : "Browse Files"}
                 </Button>
               </label>
 
               {/* Recent Documents */}
-              <div className="bg-neutral-900/60 border border-neutral-800 rounded-none p-6 backdrop-blur-md">
-                <h3 className="text-lg font-bold text-white mb-4">Recent Documents</h3>
+              <div className="bg-card border border-border rounded-none p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-foreground mb-4">Recent Documents</h3>
                 <div className="space-y-3">
                   {documents.length === 0 ? (
-                    <div className="text-center p-6 rounded-none border border-dashed border-neutral-700">
-                      <p className="text-sm text-neutral-500">No documents uploaded yet.</p>
+                    <div className="text-center p-6 rounded-none border border-dashed border-input">
+                      <p className="text-sm text-muted-foreground">No documents uploaded yet.</p>
                     </div>
                   ) : (
                     documents.map((doc, i) => (
-                      <div key={i} onClick={() => handleLoadDocumentChat(doc)} className={`flex items-center justify-between p-3 rounded-none border transition-all cursor-pointer ${i === 0 ? 'bg-blue-500/10 border-blue-500/30' : 'bg-neutral-800/50 border-transparent hover:border-neutral-700'}`}>
+                      <div key={i} onClick={() => handleLoadDocumentChat(doc)} className={`flex items-center justify-between p-3 rounded-none border transition-all cursor-pointer ${i === 0 ? 'bg-blue-50 border-blue-200' : 'bg-muted border-transparent hover:border-border hover:bg-secondary'}`}>
                         <div className="flex items-center gap-3 overflow-hidden">
-                          <File className={`h-8 w-8 shrink-0 p-1.5 rounded-none ${i === 0 ? 'text-blue-400 bg-blue-500/20' : 'text-neutral-400 bg-neutral-700'}`} />
+                          <File className={`h-8 w-8 shrink-0 p-1.5 rounded-none ${i === 0 ? 'text-blue-600 bg-blue-100' : 'text-muted-foreground bg-white border border-border'}`} />
                           <div className="overflow-hidden">
-                            <p className={`text-sm font-medium truncate ${i === 0 ? 'text-blue-100' : 'text-neutral-200'}`}>{doc.name}</p>
-                            <p className="text-xs text-neutral-500">{doc.size} • {doc.date}</p>
+                            <p className={`text-sm font-medium truncate ${i === 0 ? 'text-blue-900' : 'text-foreground'}`}>{doc.name}</p>
+                            <p className="text-xs text-muted-foreground">{doc.size} • {doc.date}</p>
                           </div>
                         </div>
                       </div>
@@ -332,15 +332,15 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
             </div>
 
             {/* Right Column: AI Chat & Quiz */}
-            <div className="lg:col-span-2 flex flex-col h-[600px] bg-neutral-900/60 border border-neutral-800 rounded-none overflow-hidden backdrop-blur-md shadow-xl relative">
+            <div className="lg:col-span-2 flex flex-col h-[600px] bg-card border border-border rounded-none overflow-hidden shadow-[0_4px_24px_-8px_rgba(124,92,255,0.15)] relative">
               {/* Overlay if no doc selected */}
               {!chatId && !isUploading && (
-                <div className="absolute inset-0 z-20 bg-neutral-950/80 backdrop-blur-sm flex flex-col items-center justify-center">
-                  <div className="h-20 w-20 rounded-none bg-neutral-900 border border-neutral-800 flex items-center justify-center mb-4 shadow-lg">
-                    <FilePlus className="h-10 w-10 text-neutral-600" />
+                <div className="absolute inset-0 z-20 bg-white/85 backdrop-blur-sm flex flex-col items-center justify-center">
+                  <div className="h-20 w-20 rounded-none bg-secondary border border-border flex items-center justify-center mb-4 shadow-sm">
+                    <FilePlus className="h-10 w-10 text-primary/70" />
                   </div>
-                  <h2 className="text-xl font-semibold text-white mb-2">No Document Selected</h2>
-                  <p className="text-neutral-400 text-center max-w-sm mb-6">Upload a document to start analyzing.</p>
+                  <h2 className="text-xl font-semibold text-foreground mb-2">No Document Selected</h2>
+                  <p className="text-muted-foreground text-center max-w-sm mb-6">Upload a document to start analyzing.</p>
                 </div>
               )}
 
@@ -351,23 +351,23 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
-                    className="absolute inset-0 z-30 bg-neutral-950 flex flex-col"
+                    className="absolute inset-0 z-30 bg-card text-foreground flex flex-col"
                   >
-                    <div className="p-4 border-b border-neutral-800 bg-neutral-900 flex justify-between items-center">
+                    <div className="p-4 border-b border-border bg-muted flex justify-between items-center">
                       <div className="flex items-center gap-2">
-                        <BrainCircuit className="h-5 w-5 text-indigo-400" />
+                        <BrainCircuit className="h-5 w-5 text-primary" />
                         <span className="font-bold">Knowledge Check</span>
                       </div>
-                      <Button variant="ghost" size="sm" onClick={() => setQuiz(null)} className="text-neutral-400 hover:text-white">
+                      <Button variant="ghost" size="sm" onClick={() => setQuiz(null)} className="text-muted-foreground hover:text-foreground hover:bg-secondary">
                         Back to Chat
                       </Button>
                     </div>
                     
                     <div className="flex-1 overflow-y-auto p-6 space-y-8">
                       {quizScore !== null && (
-                        <div className={`p-6 rounded-none border flex flex-col items-center justify-center text-center ${quizScore >= quiz.length / 2 ? 'bg-green-500/10 border-green-500/30' : 'bg-yellow-500/10 border-yellow-500/30'}`}>
+                        <div className={`p-6 rounded-none border flex flex-col items-center justify-center text-center ${quizScore >= quiz.length / 2 ? 'bg-green-50 border-green-100 text-green-700' : 'bg-amber-50 border-amber-100 text-amber-700'}`}>
                           <h2 className="text-3xl font-bold mb-2">Score: {quizScore} / {quiz.length}</h2>
-                          <p className="text-neutral-300">
+                          <p className="text-foreground/80">
                             {quizScore === quiz.length ? "Perfect score! You really know your stuff." : 
                              quizScore >= quiz.length / 2 ? "Good job! You got most of them right." : 
                              "Keep reviewing the document. You can do better next time!"}
@@ -376,7 +376,7 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                       )}
 
                       {quiz.map((q, qIndex) => (
-                        <div key={qIndex} className="bg-neutral-900/50 border border-neutral-800 rounded-none p-5">
+                        <div key={qIndex} className="bg-white border border-border rounded-none p-5 shadow-sm">
                           <p className="font-medium text-lg mb-4">{qIndex + 1}. {q.question}</p>
                           <div className="space-y-2">
                             {q.options.map((opt, oIndex) => {
@@ -387,12 +387,12 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                               let btnClass = "w-full justify-start text-left h-auto py-3 px-4 border ";
                               
                               if (isSubmitted) {
-                                if (isCorrect) btnClass += "bg-green-500/20 border-green-500/50 text-green-100";
-                                else if (isSelected && !isCorrect) btnClass += "bg-red-500/20 border-red-500/50 text-red-100";
-                                else btnClass += "bg-neutral-800 border-neutral-700 opacity-50";
+                                if (isCorrect) btnClass += "bg-green-50 border-green-200 text-green-700";
+                                else if (isSelected && !isCorrect) btnClass += "bg-red-50 border-red-200 text-red-600";
+                                else btnClass += "bg-muted border-border text-muted-foreground opacity-60";
                               } else {
-                                if (isSelected) btnClass += "bg-indigo-600 border-indigo-500 text-white";
-                                else btnClass += "bg-neutral-800 hover:bg-neutral-700 border-neutral-700";
+                                if (isSelected) btnClass += "bg-primary border-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground";
+                                else btnClass += "bg-white hover:bg-secondary border-border text-foreground";
                               }
 
                               return (
@@ -404,8 +404,8 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                                   disabled={isSubmitted}
                                 >
                                   <span className="flex-1 whitespace-normal">{opt}</span>
-                                  {isSubmitted && isCorrect && <CheckCircle2 className="h-5 w-5 text-green-400 shrink-0 ml-2" />}
-                                  {isSubmitted && isSelected && !isCorrect && <XCircle className="h-5 w-5 text-red-400 shrink-0 ml-2" />}
+                                  {isSubmitted && isCorrect && <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 ml-2" />}
+                                  {isSubmitted && isSelected && !isCorrect && <XCircle className="h-5 w-5 text-red-600 shrink-0 ml-2" />}
                                 </Button>
                               )
                             })}
@@ -417,7 +417,7 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                         <Button 
                           onClick={submitQuiz}
                           disabled={Object.keys(userAnswers).length !== quiz.length}
-                          className="w-full h-12 text-lg font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500"
+                          className="w-full h-12 text-lg font-bold bg-gradient-to-r from-[#7C5CFF] to-[#4F8CFF] hover:opacity-90 text-white"
                         >
                           Submit Answers
                         </Button>
@@ -428,14 +428,14 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
               </AnimatePresence>
 
               {/* Chat Header */}
-              <div className="p-4 border-b border-neutral-800 bg-neutral-900/50 flex items-center justify-between">
+              <div className="p-4 border-b border-border bg-muted/60 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-xl leading-none">🥨</span>
-                  <span className="font-semibold text-white">AI Analyst {documents.length > 0 ? `(${documents[0].name})` : ""}</span>
+                  <span className="font-semibold text-foreground">AI Analyst {documents.length > 0 ? `(${documents[0].name})` : ""}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  {isUploading && <span className="text-xs text-blue-400 flex items-center gap-1"><Loader2 className="h-3 w-3 animate-spin"/> Processing...</span>}
-                  <div className="text-xs text-neutral-500 bg-neutral-800 px-3 py-1 rounded-none">
+                  {isUploading && <span className="text-xs text-blue-600 flex items-center gap-1"><Loader2 className="h-3 w-3 animate-spin"/> Processing...</span>}
+                  <div className="text-xs text-muted-foreground bg-white border border-border px-3 py-1 rounded-none">
                     {chatId ? "Connected" : "Waiting"}
                   </div>
                 </div>
@@ -444,17 +444,17 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
               {/* Chat Body */}
               <div className="flex-1 p-6 overflow-y-auto space-y-6" ref={scrollRef}>
                 {messages.length === 0 && chatId && !isTyping && (
-                  <div className="text-center text-neutral-500 mt-10">
+                  <div className="text-center text-muted-foreground mt-10">
                     <p>Start asking questions about your document.</p>
                   </div>
                 )}
                 
                 {messages.map((msg, i) => (
                   <div key={i} className={`flex gap-4 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-                    <div className={`h-8 w-8 rounded-none flex items-center justify-center shrink-0 ${msg.role === "user" ? "bg-indigo-500" : "bg-blue-500/20"}`}>
+                    <div className={`h-8 w-8 rounded-none flex items-center justify-center shrink-0 ${msg.role === "user" ? "bg-primary text-primary-foreground" : "bg-blue-50 border border-blue-100"}`}>
                       {msg.role === "user" ? <span className="text-xs font-bold">U</span> : <span className="text-base leading-none">🥨</span>}
                     </div>
-                    <div className={`border rounded-none p-4 max-w-[80%] whitespace-pre-wrap ${msg.role === "user" ? "bg-indigo-600 border-indigo-500 rounded-tr-none text-white" : "bg-neutral-800/60 border-neutral-700/50 rounded-tl-none text-neutral-200"}`}>
+                    <div className={`border rounded-none p-4 max-w-[80%] whitespace-pre-wrap ${msg.role === "user" ? "bg-primary border-primary rounded-tr-none text-primary-foreground" : "bg-muted border-border rounded-tl-none text-foreground"}`}>
                       <p className="text-sm">{msg.content}</p>
                     </div>
                   </div>
@@ -462,31 +462,31 @@ Return ONLY valid JSON in this EXACT format. Do not use markdown blocks like \`\
                 
                 {isTyping && (
                   <div className="flex gap-4">
-                    <div className="h-8 w-8 rounded-none bg-blue-500/20 flex items-center justify-center shrink-0">
+                    <div className="h-8 w-8 rounded-none bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
                       <span className="text-base leading-none">🥨</span>
                     </div>
-                    <div className="bg-neutral-800/60 border border-neutral-700/50 rounded-none rounded-tl-none p-4 w-20 flex items-center justify-center">
-                      <Loader2 className="h-4 w-4 text-neutral-400 animate-spin" />
+                    <div className="bg-muted border border-border rounded-none rounded-tl-none p-4 w-20 flex items-center justify-center">
+                      <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
                     </div>
                   </div>
                 )}
               </div>
 
               {/* Chat Input */}
-              <form onSubmit={handleSendMessage} className="p-4 border-t border-neutral-800 bg-neutral-900/80">
+              <form onSubmit={handleSendMessage} className="p-4 border-t border-border bg-muted/60">
                 <div className="relative">
                   <Input 
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder={chatId ? "Ask a question about the document..." : "Upload a document first..."}
                     disabled={!chatId || isTyping}
-                    className="w-full bg-neutral-950 border-neutral-800 text-white h-12 pl-4 pr-12 rounded-none focus-visible:ring-blue-500/50 disabled:opacity-50"
+                    className="w-full bg-white border-input text-foreground placeholder:text-muted-foreground h-12 pl-4 pr-12 rounded-none focus-visible:ring-blue-500/50 disabled:opacity-50"
                   />
                   <Button 
                     type="submit" 
                     size="icon" 
                     disabled={!chatId || !input.trim() || isTyping}
-                    className="absolute right-1.5 top-1.5 h-9 w-9 bg-blue-600 hover:bg-blue-500 disabled:bg-neutral-700 text-white rounded-none transition-colors"
+                    className="absolute right-1.5 top-1.5 h-9 w-9 bg-blue-600 hover:bg-blue-500 disabled:bg-neutral-300 text-white rounded-none transition-colors"
                   >
                     <Send className="h-4 w-4" />
                   </Button>

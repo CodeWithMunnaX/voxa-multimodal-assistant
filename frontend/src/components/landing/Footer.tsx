@@ -18,82 +18,82 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-background/50 pt-20 pb-10 overflow-hidden">
+    <footer className="relative border-t border-border bg-white/60 pt-20 pb-10 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-[#7C5CFF] to-[#4F8CFF] flex items-center justify-center text-white">
                 <Mic className="h-4 w-4" />
               </div>
-              <span className="font-bold text-xl tracking-tight text-white">
-                Voxa <span className="text-violet-400">AI</span>
+              <span className="font-bold text-xl tracking-tight text-foreground">
+                Voxa <span className="text-primary">AI</span>
               </span>
             </Link>
-            <p className="text-secondary-text text-sm leading-relaxed max-w-xs">
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
               The premium AI productivity ecosystem. Voice, documents, and learning, unified in one intelligent workspace.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition-colors">
+              <a href="#" className="h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-colors">
                 <TwitterIcon className="h-4 w-4" />
               </a>
-              <a href="#" className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition-colors">
+              <a href="#" className="h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-colors">
                 <GithubIcon className="h-4 w-4" />
               </a>
-              <a href="#" className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-white/10 transition-colors">
+              <a href="#" className="h-10 w-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary transition-colors">
                 <LinkedinIcon className="h-4 w-4" />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-semibold text-white mb-6">Product</h4>
-            <ul className="space-y-4 text-sm text-secondary-text">
-              <li><Link href="#" className="hover:text-white transition-colors">Voice Assistant</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Document Analyzer</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">AI Tutor</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Pricing</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Changelog</Link></li>
+            <h4 className="font-semibold text-foreground mb-6">Product</h4>
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li><Link href="#" className="hover:text-primary transition-colors">Voice Assistant</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Document Analyzer</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">AI Tutor</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Changelog</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold text-white mb-6">Resources</h4>
-            <ul className="space-y-4 text-sm text-secondary-text">
-              <li><Link href="#" className="hover:text-white transition-colors">Documentation</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Community</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Help Center</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">API Reference</Link></li>
+            <h4 className="font-semibold text-foreground mb-6">Resources</h4>
+            <ul className="space-y-4 text-sm text-muted-foreground">
+              <li><Link href="#" className="hover:text-primary transition-colors">Documentation</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Community</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">Help Center</Link></li>
+              <li><Link href="#" className="hover:text-primary transition-colors">API Reference</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold text-white mb-6">Stay Updated</h4>
-            <p className="text-secondary-text text-sm mb-4">Subscribe to our newsletter for the latest AI features.</p>
+            <h4 className="font-semibold text-foreground mb-6">Stay Updated</h4>
+            <p className="text-muted-foreground text-sm mb-4">Subscribe to our newsletter for the latest AI features.</p>
             <div className="flex items-center gap-2">
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-violet-500 w-full"
+                className="bg-white border border-input rounded-xl px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary w-full"
               />
-              <Button size="icon" className="bg-violet-600 hover:bg-violet-700 rounded-xl shrink-0">
+              <Button size="icon" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl shrink-0">
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-secondary-text text-sm">
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} Voxa AI Inc. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-sm text-secondary-text">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-white transition-colors">Cookie Policy</Link>
+          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
+            <Link href="#" className="hover:text-primary transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

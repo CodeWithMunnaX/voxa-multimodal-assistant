@@ -15,7 +15,7 @@
   --color-electric-blue: #4F8CFF;
   --color-magenta: #C84DFF;
   --color-deep-black: #0B0B0F;
-  --color-secondary-text: #A1A1AA;
+  --color-secondary-text: #6b6880;
   
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -56,23 +56,23 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0B0B0F;
+  --background: #f8f7fc;
+  --foreground: #1e1b2e;
   --card: #ffffff;
-  --card-foreground: #0B0B0F;
+  --card-foreground: #1e1b2e;
   --popover: #ffffff;
-  --popover-foreground: #0B0B0F;
+  --popover-foreground: #1e1b2e;
   --primary: #7C5CFF;
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #0B0B0F;
-  --muted: #f4f4f5;
-  --muted-foreground: #A1A1AA;
-  --accent: #4F8CFF;
-  --accent-foreground: #ffffff;
-  --destructive: #ff4f4f;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
+  --secondary: #f1eeff;
+  --secondary-foreground: #3b2f7a;
+  --muted: #f3f2f8;
+  --muted-foreground: #6b6880;
+  --accent: #ece7ff;
+  --accent-foreground: #5b3fe0;
+  --destructive: #e5484d;
+  --border: #e6e3f0;
+  --input: #e0dcee;
   --ring: #7C5CFF;
   --chart-1: #7C5CFF;
   --chart-2: #4F8CFF;
@@ -81,12 +81,12 @@
   --chart-5: #eab308;
   --radius: 0px;
   --sidebar: #ffffff;
-  --sidebar-foreground: #0B0B0F;
+  --sidebar-foreground: #1e1b2e;
   --sidebar-primary: #7C5CFF;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f4f4f5;
-  --sidebar-accent-foreground: #0B0B0F;
-  --sidebar-border: #e4e4e7;
+  --sidebar-accent: #f1eeff;
+  --sidebar-accent-foreground: #5b3fe0;
+  --sidebar-border: #e6e3f0;
   --sidebar-ring: #7C5CFF;
 }
 
@@ -138,10 +138,10 @@
   
   /* Glassmorphism utilities */
   .glass {
-    @apply bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg;
+    @apply bg-white/80 backdrop-blur-xl border border-border shadow-sm;
   }
   .glass-card {
-    @apply bg-card backdrop-blur-xl border border-border shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    @apply bg-card backdrop-blur-xl border border-border shadow-[0_4px_24px_-8px_rgba(124,92,255,0.15)];
   }
   .glass-panel {
     @apply bg-background/80 backdrop-blur-2xl border border-border;

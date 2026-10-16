@@ -130,47 +130,47 @@ export default function HistoryPage() {
   const getItemCategoryBadge = (cat: string) => {
     switch (cat) {
       case "AI Chat":
-        return <div className="p-2 bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center"><MessageSquare className="w-4 h-4" /></div>
+        return <div className="p-2 bg-secondary text-primary border border-primary/20 flex items-center justify-center"><MessageSquare className="w-4 h-4" /></div>
       case "Voice Assistant":
-        return <div className="p-2 bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center"><Mic className="w-4 h-4" /></div>
+        return <div className="p-2 bg-purple-50 text-purple-600 border border-purple-100 flex items-center justify-center"><Mic className="w-4 h-4" /></div>
       case "Doc Analyzer":
-        return <div className="p-2 bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center"><FileText className="w-4 h-4" /></div>
+        return <div className="p-2 bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center"><FileText className="w-4 h-4" /></div>
       case "AI Notes":
-        return <div className="p-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center"><StickyNote className="w-4 h-4" /></div>
+        return <div className="p-2 bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center"><StickyNote className="w-4 h-4" /></div>
       default:
-        return <div className="p-2 bg-neutral-800 text-neutral-400 flex items-center justify-center"><Sparkles className="w-4 h-4" /></div>
+        return <div className="p-2 bg-muted text-muted-foreground flex items-center justify-center"><Sparkles className="w-4 h-4" /></div>
     }
   }
 
   return (
-    <div className="flex flex-col min-h-full bg-transparent text-white font-sans relative">
+    <div className="flex flex-col min-h-full bg-transparent text-foreground font-sans relative">
       <main className="flex-1 p-8 pb-20 relative z-10">
         <div className="max-w-5xl mx-auto space-y-6">
           
           {/* Header & Search */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white">
+              <h1 className="text-3xl font-extrabold tracking-tight text-foreground">
                 Activity History
               </h1>
-              <p className="text-neutral-400 text-sm mt-1">
+              <p className="text-muted-foreground text-sm mt-1">
                 Centralized history of all your AI questions, voice queries, documents, and notes.
               </p>
             </div>
 
             <div className="relative w-full md:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search history across all tools..."
-                className="w-full bg-neutral-900/60 border-neutral-800 text-white pl-10 rounded-none focus-visible:ring-indigo-500/50 backdrop-blur-md text-xs h-10"
+                className="w-full bg-white border-input text-foreground placeholder:text-muted-foreground pl-10 rounded-none focus-visible:ring-primary/30 shadow-sm text-xs h-10"
               />
             </div>
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-neutral-800/80">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-border">
             {categories.map((cat) => {
               const count = cat === "All" ? items.length : items.filter(i => i.category === cat).length
               const isActive = selectedCategory === cat
@@ -180,12 +180,12 @@ export default function HistoryPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 text-xs font-semibold rounded-none border transition-all flex items-center gap-2 whitespace-nowrap ${
                     isActive 
-                      ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg' 
-                      : 'bg-neutral-900/50 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700'
+                      ? 'bg-primary border-primary text-primary-foreground shadow-[0_4px_24px_-8px_rgba(124,92,255,0.45)]' 
+                      : 'bg-white border-border text-muted-foreground hover:text-foreground hover:bg-muted'
                   }`}
                 >
                   <span>{cat}</span>
-                  <span className={`px-1.5 py-0.5 text-[10px] font-mono ${isActive ? 'bg-indigo-700 text-white' : 'bg-neutral-800 text-neutral-400'}`}>
+                  <span className={`px-1.5 py-0.5 text-[10px] font-mono ${isActive ? 'bg-white/20 text-white' : 'bg-muted text-muted-foreground'}`}>
                     {count}
                   </span>
                 </button>
@@ -194,26 +194,26 @@ export default function HistoryPage() {
           </div>
 
           {/* Main Unified History Area */}
-          <div className="bg-neutral-900/60 border border-neutral-800 rounded-none p-6 backdrop-blur-md shadow-xl min-h-[450px] flex flex-col">
+          <div className="bg-card border border-border rounded-none p-6 shadow-[0_4px_24px_-8px_rgba(124,92,255,0.15)] min-h-[450px] flex flex-col">
             
             {isLoading ? (
-              <div className="flex-1 flex flex-col items-center justify-center text-neutral-500 py-16">
-                <Loader2 className="h-8 w-8 animate-spin mb-3 text-indigo-400" />
+              <div className="flex-1 flex flex-col items-center justify-center text-muted-foreground py-16">
+                <Loader2 className="h-8 w-8 animate-spin mb-3 text-primary" />
                 <span className="text-xs">Loading complete activity history...</span>
               </div>
             ) : filteredItems.length === 0 ? (
               <div className="flex-1 flex flex-col items-center justify-center text-center p-12">
-                <div className="h-16 w-16 rounded-none bg-neutral-800/80 border border-neutral-700 flex items-center justify-center mb-4">
-                  <FolderOpen className="h-8 w-8 text-neutral-500" />
+                <div className="h-16 w-16 rounded-none bg-secondary border border-border flex items-center justify-center mb-4">
+                  <FolderOpen className="h-8 w-8 text-primary/70" />
                 </div>
-                <h2 className="text-lg font-bold text-white mb-1">No activity records found</h2>
-                <p className="text-neutral-400 text-xs max-w-sm">
+                <h2 className="text-lg font-bold text-foreground mb-1">No activity records found</h2>
+                <p className="text-muted-foreground text-xs max-w-sm">
                   {searchQuery ? `No items matched "${searchQuery}".` : `No activity recorded under ${selectedCategory}.`}
                 </p>
               </div>
             ) : (
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs text-neutral-400 font-mono mb-2 px-1">
+                <div className="flex items-center justify-between text-xs text-muted-foreground font-mono mb-2 px-1">
                   <span>Showing {filteredItems.length} records</span>
                   <span>Click item to inspect details</span>
                 </div>
@@ -226,10 +226,10 @@ export default function HistoryPage() {
                       <div 
                         key={item.id}
                         onClick={() => setExpandedId(isExpanded ? null : item.id)}
-                        className={`group flex flex-col p-4 bg-neutral-950/40 hover:bg-neutral-900/80 border transition-all cursor-pointer rounded-none ${
+                        className={`group flex flex-col p-4 bg-white hover:bg-muted/60 border transition-all cursor-pointer rounded-none ${
                           isExpanded 
-                            ? 'border-indigo-500/60 bg-neutral-900/90 shadow-lg' 
-                            : 'border-neutral-800/80 hover:border-neutral-700'
+                            ? 'border-primary/50 ring-1 ring-primary/20 shadow-sm' 
+                            : 'border-border hover:border-primary/30'
                         }`}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -237,20 +237,20 @@ export default function HistoryPage() {
                             {getItemCategoryBadge(item.category)}
                             <div className="overflow-hidden">
                               <div className="flex items-center gap-2">
-                                <h4 className="font-semibold text-sm text-white truncate">{item.title}</h4>
-                                <span className="text-[10px] px-2 py-0.5 border border-neutral-800 bg-neutral-900 text-neutral-400 font-mono">
+                                <h4 className="font-semibold text-sm text-foreground truncate">{item.title}</h4>
+                                <span className="text-[10px] px-2 py-0.5 border border-border bg-muted text-muted-foreground font-mono">
                                   {item.category}
                                 </span>
                               </div>
-                              <div className="flex items-center gap-3 mt-1 text-xs text-neutral-500">
+                              <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
                                 <span className="flex items-center gap-1">
-                                  <Calendar className="w-3 h-3 text-neutral-500" />
+                                  <Calendar className="w-3 h-3 text-muted-foreground" />
                                   {formatRelativeTime(item.created_at)}
                                 </span>
                                 {item.detail && (
                                   <>
                                     <span>•</span>
-                                    <span className="text-neutral-400 truncate">{item.detail}</span>
+                                    <span className="text-muted-foreground truncate">{item.detail}</span>
                                   </>
                                 )}
                               </div>
@@ -258,7 +258,7 @@ export default function HistoryPage() {
                           </div>
 
                           <div className="flex items-center justify-end sm:opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span className="text-xs font-semibold text-indigo-400 flex items-center gap-1">
+                            <span className="text-xs font-semibold text-primary flex items-center gap-1">
                               {isExpanded ? "Hide" : "View"}
                               <ChevronRight className={`w-3.5 h-3.5 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
                             </span>
@@ -267,22 +267,22 @@ export default function HistoryPage() {
 
                         {/* Expanded Content View */}
                         {isExpanded && item.raw && (
-                          <div className="mt-4 pt-4 border-t border-neutral-800 text-xs space-y-3 cursor-default" onClick={(e) => e.stopPropagation()}>
+                          <div className="mt-4 pt-4 border-t border-border text-xs space-y-3 cursor-default" onClick={(e) => e.stopPropagation()}>
                             
                             {/* Chat Messages */}
                             {item.raw.messages && Array.isArray(item.raw.messages) && (
                               <div className="max-h-[350px] overflow-y-auto space-y-3 pr-2 custom-scrollbar">
                                 {item.raw.messages.length === 0 ? (
-                                  <p className="text-neutral-500 italic">No message details stored for this session.</p>
+                                  <p className="text-muted-foreground italic">No message details stored for this session.</p>
                                 ) : (
                                   item.raw.messages.map((msg: any, idx: number) => {
                                     if (msg.content?.includes("INSTRUCTION:") || msg.content?.includes("DOCUMENT CONTEXT:")) return null
                                     return (
                                       <div key={idx} className={`flex gap-2.5 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
-                                        <div className={`w-6 h-6 rounded-none flex items-center justify-center shrink-0 text-[10px] font-bold ${msg.role === "user" ? "bg-indigo-600 text-white" : "bg-neutral-800 text-neutral-300"}`}>
+                                        <div className={`w-6 h-6 rounded-none flex items-center justify-center shrink-0 text-[10px] font-bold ${msg.role === "user" ? "bg-primary text-primary-foreground" : "bg-secondary text-primary"}`}>
                                           {msg.role === "user" ? "U" : <Bot className="w-3.5 h-3.5" />}
                                         </div>
-                                        <div className={`p-3 rounded-none max-w-[85%] whitespace-pre-wrap ${msg.role === "user" ? "bg-indigo-950/40 border border-indigo-500/30 text-white" : "bg-neutral-900 border border-neutral-800 text-neutral-300"}`}>
+                                        <div className={`p-3 rounded-none max-w-[85%] whitespace-pre-wrap ${msg.role === "user" ? "bg-secondary border border-primary/20 text-foreground" : "bg-muted border border-border text-foreground"}`}>
                                           {msg.content}
                                         </div>
                                       </div>
@@ -294,13 +294,13 @@ export default function HistoryPage() {
 
                             {/* Cloudinary Document URL */}
                             {item.raw.cloudinary_url && (
-                              <div className="p-3 bg-neutral-900 border border-neutral-800 flex items-center justify-between">
-                                <span className="text-neutral-300 truncate max-w-md">Cloudinary Asset: {item.raw.cloudinary_url}</span>
+                              <div className="p-3 bg-muted border border-border flex items-center justify-between">
+                                <span className="text-foreground truncate max-w-md">Cloudinary Asset: {item.raw.cloudinary_url}</span>
                                 <a 
                                   href={item.raw.cloudinary_url} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
-                                  className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center gap-1.5 transition-colors"
+                                  className="px-3 py-1.5 bg-primary hover:bg-primary/90 text-primary-foreground font-medium flex items-center gap-1.5 transition-colors"
                                 >
                                   Open Link <ExternalLink className="w-3 h-3" />
                                 </a>
@@ -309,7 +309,7 @@ export default function HistoryPage() {
 
                             {/* HTML Content for Notes */}
                             {item.raw.content && (
-                              <div className="p-4 bg-neutral-900 border border-neutral-800 max-h-[300px] overflow-y-auto prose prose-invert max-w-none text-xs leading-relaxed" dangerouslySetInnerHTML={{ __html: item.raw.content }} />
+                              <div className="p-4 bg-white border border-border text-foreground max-h-[300px] overflow-y-auto prose max-w-none text-xs leading-relaxed" dangerouslySetInnerHTML={{ __html: item.raw.content }} />
                             )}
 
                           </div>

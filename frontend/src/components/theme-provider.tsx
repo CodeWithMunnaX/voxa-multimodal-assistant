@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useEffect, useState } from "react"
+import React, { createContext, useContext, useEffect } from "react"
 
 type Theme = "dark" | "light" | "system"
 
@@ -10,13 +10,16 @@ interface ThemeProviderContextType {
 }
 
 const ThemeProviderContext = createContext<ThemeProviderContextType>({
-  theme: "dark",
+  theme: "light",
   setTheme: () => null,
 })
 
+/**
+ * Voxa ships a single light theme. The provider keeps the same API so existing
+ * callers (e.g. the settings page) keep working, but always applies "light".
+ */
 export function ThemeProvider({
   children,
-  defaultTheme = "dark",
   storageKey = "voxa-theme",
 }: {
   children: React.ReactNode
@@ -25,35 +28,16 @@ export function ThemeProvider({
   attribute?: string
   enableSystem?: boolean
 }) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme)
-
   useEffect(() => {
-    const savedTheme = (localStorage.getItem(storageKey) as Theme) || defaultTheme
-    setThemeState(savedTheme)
-    applyTheme(savedTheme)
-  }, [])
-
-  const applyTheme = (t: Theme) => {
-    if (typeof window === "undefined") return
     const root = document.documentElement
-    root.classList.remove("light", "dark")
-
-    if (t === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-      root.classList.add(systemTheme)
-    } else {
-      root.classList.add(t)
-    }
-  }
-
-  const setTheme = (t: Theme) => {
-    localStorage.setItem(storageKey, t)
-    setThemeState(t)
-    applyTheme(t)
-  }
+    root.classList.remove("dark")
+    root.classList.add("light")
+    // Clear a previously saved dark preference
+    localStorage.removeItem(storageKey)
+  }, [storageKey])
 
   return (
-    <ThemeProviderContext.Provider value={{ theme, setTheme }}>
+    <ThemeProviderContext.Provider value={{ theme: "light", setTheme: () => null }}>
       {children}
     </ThemeProviderContext.Provider>
   )
